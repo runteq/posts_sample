@@ -1,0 +1,40 @@
+<div class="max-w-6xl mx-auto px-4">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold">おすすめ書籍</h1>
+    <% if logged_in? %>
+      <%= link_to "本を投稿する", new_book_post_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+    <% end %>
+  </div>
+
+  <% if @book_posts.empty? %>
+    <p class="text-gray-500 text-center py-10">まだ投稿がありません</p>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @book_posts.each do |book_post| %>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <% if book_post.image.attached? %>
+            <%= image_tag book_post.image, class: "w-full h-48 object-cover" %>
+          <% else %>
+            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+              <span class="text-gray-400">No Image</span>
+            </div>
+          <% end %>
+          <div class="p-4">
+            <%= link_to book_post_path(book_post) do %>
+              <h2 class="text-lg font-semibold text-gray-800 hover:text-indigo-600"><%= book_post.title %></h2>
+            <% end %>
+            <p class="text-sm text-gray-600 mt-1">著者: <%= book_post.author %></p>
+            <p class="text-gray-600 mt-2 text-sm line-clamp-2"><%= truncate(book_post.body, length: 80) %></p>
+            <div class="flex items-center justify-between mt-4 text-sm text-gray-500">
+              <span><%= book_post.user.name %></span>
+              <div class="flex items-center space-x-3">
+                <span>♡ <%= book_post.likes.count %></span>
+                <span>💬 <%= book_post.comments.count %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

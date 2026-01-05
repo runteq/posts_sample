@@ -1,0 +1,14 @@
+<div id="<%= dom_id(comment) %>" class="border-b border-gray-200 pb-4">
+  <div class="flex justify-between items-start">
+    <div>
+      <span class="font-semibold text-gray-800"><%= comment.user.name %></span>
+      <span class="text-sm text-gray-500 ml-2"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+    </div>
+    <% if logged_in? && comment.user == current_user %>
+      <%= button_to book_post_comment_path(comment.book_post, comment), method: :delete, data: { turbo_confirm: "削除しますか？" }, class: "text-red-500 text-sm hover:underline" do %>
+        削除
+      <% end %>
+    <% end %>
+  </div>
+  <p class="text-gray-600 mt-2 whitespace-pre-wrap"><%= comment.body %></p>
+</div>

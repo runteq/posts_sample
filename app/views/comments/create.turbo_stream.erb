@@ -1,0 +1,14 @@
+<%= turbo_stream.prepend "comments" do %>
+  <%= render partial: "comments/comment", locals: { comment: @comment } %>
+<% end %>
+
+<%= turbo_stream.replace "new_comment" do %>
+  <%= form_with model: [@book_post, Comment.new], id: "new_comment", class: "mb-6" do |f| %>
+    <div>
+      <%= f.text_area :body, placeholder: "コメントを入力...", rows: 3, class: "w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 border" %>
+    </div>
+    <div class="mt-2">
+      <%= f.submit "コメントする", class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 cursor-pointer" %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,15 @@
+<% if logged_in? %>
+  <% if book_post.liked_by?(current_user) %>
+    <%= button_to book_post_like_path(book_post), method: :delete, class: "flex items-center space-x-1 text-red-500 hover:text-red-600" do %>
+      <span>♥</span>
+      <span><%= book_post.likes.count %></span>
+    <% end %>
+  <% else %>
+    <%= button_to book_post_like_path(book_post), method: :post, class: "flex items-center space-x-1 text-gray-500 hover:text-red-500" do %>
+      <span>♡</span>
+      <span><%= book_post.likes.count %></span>
+    <% end %>
+  <% end %>
+<% else %>
+  <span class="text-gray-500">♡ <%= book_post.likes.count %></span>
+<% end %>

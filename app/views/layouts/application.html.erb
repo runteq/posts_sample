@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BookShelf - おすすめ書籍を共有しよう</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <!-- ナビゲーションバー -->
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <%= link_to root_path, class: "text-xl font-bold text-indigo-600" do %>
+              📚 BookShelf
+            <% end %>
+          </div>
+          <div class="flex items-center space-x-4">
+            <% if logged_in? %>
+              <span class="text-gray-600"><%= current_user.name %> さん</span>
+              <%= link_to "投稿する", new_book_post_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+              <%= button_to "ログアウト", logout_path, method: :delete, class: "text-gray-600 hover:text-gray-900" %>
+            <% else %>
+              <%= link_to "ログイン", login_path, class: "text-gray-600 hover:text-gray-900" %>
+              <%= link_to "新規登録", signup_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- フラッシュメッセージ -->
+    <% if notice %>
+      <div class="max-w-6xl mx-auto px-4 mt-4">
+        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md">
+          <%= notice %>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="max-w-6xl mx-auto px-4 mt-4">
+        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          <%= alert %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- メインコンテンツ -->
+    <main class="py-8">
+      <%= yield %>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-white border-t mt-auto">
+      <div class="max-w-6xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
+        © 2026 BookShelf. All rights reserved.
+      </div>
+    </footer>
+  </body>
+</html>

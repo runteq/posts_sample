@@ -1,0 +1,5 @@
+<%= turbo_stream.replace "like-button" do %>
+  <div id="like-button">
+    <%= render partial: "likes/button", locals: { book_post: @book_post } %>
+  </div>
+<% end %>
