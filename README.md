@@ -35,8 +35,8 @@
 ### 1. リポジトリをクローン
 
 ```bash
-git clone git@github.com:runteq/posts_sample.git
-cd posts_sample
+git clone git@github.com:runteq/bookshelf_sample.git
+cd bookshelf_sample
 ```
 
 ### 2. Dockerコンテナを起動
