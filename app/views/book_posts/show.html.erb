@@ -1,13 +1,11 @@
 <div class="max-w-4xl mx-auto px-4">
   <div class="bg-white rounded-lg shadow-md overflow-hidden">
     <div class="md:flex">
-      <div class="md:w-1/3">
+      <div class="md:w-1/3 bg-gray-100 flex items-center justify-center p-4 min-h-64">
         <% if @book_post.image.attached? %>
-          <%= image_tag @book_post.image, class: "w-full h-64 md:h-full object-cover" %>
+          <%= image_tag @book_post.image, class: "max-h-80 max-w-full object-contain" %>
         <% else %>
-          <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
-            <span class="text-gray-400">No Image</span>
-          </div>
+          <span class="text-gray-400">No Image</span>
         <% end %>
       </div>
       <div class="p-6 md:w-2/3">
